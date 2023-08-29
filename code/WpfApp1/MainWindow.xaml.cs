@@ -32,11 +32,14 @@ namespace WpfApp1
             InitializeComponent();
 
 
-            _ = InitServerAsync();
+            var t=InitServerAsync();
+
+            t.Wait();
+
             initClient();
 
 
-            _ =  _MqttClient.SubscribeAsync(topic);
+           
 
 
         }
@@ -110,12 +113,13 @@ namespace WpfApp1
         string ip = "127.0.0.1";
         int port = 10001;
         public string topic = "XXXXXXXXXXXXXX";
+        bool withPersistentSessions = true;
 
         public async Task InitServerAsync()
         {
 
           
-            bool withPersistentSessions = true;
+            
 
             MqttServerOptionsBuilder mqttServerOptionsBuilder = new MqttServerOptionsBuilder();  // MQTT服务器配置
             mqttServerOptionsBuilder.WithDefaultEndpoint();
@@ -124,16 +128,18 @@ namespace WpfApp1
                                                                                               //mqttServerOptionsBuilder.WithEncryptedEndpointPort(port);                        // 使用加密的端点端口
             mqttServerOptionsBuilder.WithPersistentSessions(withPersistentSessions);  // 持续会话
             mqttServerOptionsBuilder.WithConnectionBacklog(2000);                     // 最大连接数
-
+            
 
             MqttServerOptions mqttServerOptions = mqttServerOptionsBuilder.Build();
             _MqttServer = new MqttFactory().CreateMqttServer(mqttServerOptions);  // 创建服务（配置）
+            _MqttServer.ApplicationMessageNotConsumedAsync += ApplicationMessageNotConsumedHandle;  // 设置消息处理程序
+            _MqttServer.ClientSubscribedTopicAsync += MqttServer_ClientSubscribedTopicAsync;
 
 
             await _MqttServer.StartAsync();  // 开启服务
 
 
-            _MqttServer.ApplicationMessageNotConsumedAsync += ApplicationMessageNotConsumedHandle;  // 设置消息处理程序
+           
 
             /// <summary>
             /// 设置消息处理程序
@@ -143,10 +149,18 @@ namespace WpfApp1
 
         }
 
-       
+        private Task MqttServer_ClientSubscribedTopicAsync(ClientSubscribedTopicEventArgs arg)
+        {
+            Console.WriteLine("服务器>> 客户端订阅" + arg.ClientId);
+            return Task.CompletedTask;
+        }
+
         private Task ApplicationMessageNotConsumedHandle(ApplicationMessageNotConsumedEventArgs arg)
         {
             var msg = arg.ApplicationMessage.PayloadSegment;
+
+            
+            Console.WriteLine("服务器>> 客户端订阅" + "ApplicationMessageNotConsumedHandle");
 
             Console.WriteLine(Encoding.UTF8.GetString(msg.Array));
 
@@ -163,13 +177,14 @@ namespace WpfApp1
             MqttClientOptionsBuilder mqttClientOptionsBuilder = new MqttClientOptionsBuilder();
             mqttClientOptionsBuilder.WithTcpServer(ip, port);          // 设置MQTT服务器地址
            
-            mqttClientOptionsBuilder.WithClientId(Guid.NewGuid().ToString("N"));  // 设置客户端序列号
+            mqttClientOptionsBuilder.WithClientId("client 00");  // 设置客户端序列号
             MqttClientOptions options = mqttClientOptionsBuilder.Build();
 
             _MqttClient = new MqttFactory().CreateMqttClient();
           
             _MqttClient.ApplicationMessageReceivedAsync += ApplicationMessageReceivedHandle;  // 发送消息事件
 
+         
 
             try {
 
@@ -191,12 +206,32 @@ namespace WpfApp1
             await _MqttClient.SubscribeAsync(topicFilter, CancellationToken.None);  // 订阅
 
 
+
+            var applicationMessage = new MqttApplicationMessageBuilder()
+                .WithTopic(topic)
+                .WithPayload("19.5")
+                .Build();
+
+            await _MqttClient.PublishAsync(applicationMessage, CancellationToken.None);
+
+            Console.WriteLine("PublishAsync"+ "19.5");
+
+
         }
 
         private Task ApplicationMessageReceivedHandle(MqttApplicationMessageReceivedEventArgs arg)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("客户端：ApplicationMessageReceivedHandle");
+
+
+            Console.WriteLine("Received application message.");
+            var arr = arg.ApplicationMessage.PayloadSegment.Array;
+            Console.WriteLine(Encoding.UTF8.GetString(arr));
+
+            return Task.CompletedTask;
         }
+
+
     }
 
 
