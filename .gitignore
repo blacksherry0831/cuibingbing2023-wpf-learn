@@ -2,3 +2,7 @@
 /code/WpfApp1/bin
 /code/WpfApp1/obj
 /code/WpfApp1/packages
+/code/ConsoleApp-grpc-client/bin
+/code/ConsoleApp-grpc-client/obj
+/code/ConsoleApp-grpc-service/bin
+/code/ConsoleApp-grpc-service/obj

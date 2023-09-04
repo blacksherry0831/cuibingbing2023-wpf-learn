@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.33801.447
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1.csproj", "{BD7CB9AD-73EE-4D5C-8E96-CD02367C5738}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp-grpc-service", "..\ConsoleApp-grpc-service\ConsoleApp-grpc-service.csproj", "{BCEF07E1-0B5B-4EB6-96E8-F75BF6A883B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp-grpc-client", "..\ConsoleApp-grpc-client\ConsoleApp-grpc-client.csproj", "{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BD7CB9AD-73EE-4D5C-8E96-CD02367C5738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD7CB9AD-73EE-4D5C-8E96-CD02367C5738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD7CB9AD-73EE-4D5C-8E96-CD02367C5738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCEF07E1-0B5B-4EB6-96E8-F75BF6A883B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCEF07E1-0B5B-4EB6-96E8-F75BF6A883B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCEF07E1-0B5B-4EB6-96E8-F75BF6A883B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCEF07E1-0B5B-4EB6-96E8-F75BF6A883B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
