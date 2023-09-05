@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp-grpc-service", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp-grpc-client", "..\ConsoleApp-grpc-client\ConsoleApp-grpc-client.csproj", "{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "grpc", "..\grpc\grpc.csproj", "{BB90907E-0E3F-4C20-9D1F-A24429BC90A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD502CCA-E3A9-44C9-B4BB-FE7C2E2EDE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB90907E-0E3F-4C20-9D1F-A24429BC90A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB90907E-0E3F-4C20-9D1F-A24429BC90A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB90907E-0E3F-4C20-9D1F-A24429BC90A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB90907E-0E3F-4C20-9D1F-A24429BC90A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
